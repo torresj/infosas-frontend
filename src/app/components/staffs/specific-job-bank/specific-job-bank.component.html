@@ -1,0 +1,62 @@
+
+<mat-card appearance="raised" class="specific-job-bank-card">
+  <mat-card-header><span class="name">{{getTitle()}}</span></mat-card-header>
+  <mat-card-content>
+    <section class="card-content">
+      <div class="score-card">
+        <div class="list-section">
+          <div class="list-title">Estado</div>
+          <div class="note">
+            <span class="note-title">Tratado:</span>
+            <span class="note-value">{{jobBank.treaty}}</span>
+          </div>
+          <div class="note">
+            <span class="note-title">Adm. general:</span>
+            <span class="note-value">{{jobBank.general_admission}}</span>
+          </div>
+          <div class="note">
+            <span class="note-title">Adm. específica:</span>
+            <span class="note-value">{{jobBank.specific_admission}}</span>
+          </div>
+          @if (jobBank.general_admission == Status.EXCLUIDA || jobBank.specific_admission == Status.EXCLUIDA){
+            @for (exclusion of jobBank.exclusionReasons; track exclusion){
+              <div class="note exclusion-reason">
+                <span class="note-title">Código de exclusión:</span>
+                <span class="note-value">{{exclusion.code}}</span>
+              </div>
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="exclusion-title">Motivo de exclusión</mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <p class="exclusion-reason-text">{{exclusion.reason}}</p>
+                </mat-expansion-panel>
+              </mat-accordion>
+            }
+          }
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="list-section">
+          <div class="list-title">Baremo</div>
+          <div class="note">
+            <span class="note-title">Experiencia:</span>
+            <span class="note-value">{{jobBank.experience}}</span>
+          </div>
+          <div class="note">
+            <span class="note-title">Formación:</span>
+            <span class="note-value">{{jobBank.formation}}</span>
+          </div>
+          <div class="note">
+            <span class="note-title">Otros:</span>
+            <span class="note-value">{{jobBank.others}}</span>
+          </div>
+          <div class="note">
+            <span class="note-title">Total:</span>
+            <span class="note-value total">{{jobBank.total}}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </mat-card-content>
+</mat-card>

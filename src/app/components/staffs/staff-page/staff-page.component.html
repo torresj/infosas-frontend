@@ -1,0 +1,65 @@
+<section class="staff-page">
+  @if (loading$ | async) {
+    <div class="spinner"><mat-spinner></mat-spinner>.</div>
+  } @else {
+    <button class="back-button" mat-icon-button (click)="onBackClick()">
+      <mat-icon class="back-icon">arrow_back</mat-icon>
+    </button>
+    <section class="staffs-section">
+      @if (staff$ | async; as staff) {
+          <div class="title">{{staff.name}} {{staff.surname}}</div>
+          <div class="subtitle">{{staff.dni}}</div>
+
+          <mat-tab-group class="tabs">
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <div matBadge="{{staff.staffExams.length}}" matBadgeOverlap="false">Exámenes</div>
+              </ng-template>
+              <section class="list">
+                @if (staff.staffExams.length == 0){
+                  <div class="empty-list">No hay datos de {{staff.name}} en ninguna oposición abierta</div>
+                }
+                @else {
+                  @for (exam of staff.staffExams; track $index) {
+                    <exam [exam]="exam"/>
+                  }
+                }
+              </section>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <div matBadge="{{staff.staffJobBanks.length}}" matBadgeOverlap="false">Bolsas</div>
+              </ng-template>
+              <section class="list">
+                @if (staff.staffJobBanks.length == 0){
+                  <div class="empty-list">{{staff.name}} no está en ninguna bolsa</div>
+                }
+                @else {
+                  @for (jobBank of staff.staffJobBanks; track $index) {
+                    <job-bank [jobBank]="jobBank"/>
+                  }
+                }
+              </section>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <div matBadge="{{staff.staffSpecificJobBanks.length}}" matBadgeOverlap="false">Bolsas específicas</div>
+              </ng-template>
+              <section class="list">
+                @if (staff.staffSpecificJobBanks.length == 0){
+                  <div class="empty-list">{{staff.name}} no está en ninguna bolsa específica</div>
+                }
+                @else {
+                  @for (jobBank of staff.staffSpecificJobBanks; track $index) {
+                    <specific-job-bank [jobBank]="jobBank"/>
+                  }
+                }
+              </section>
+            </mat-tab>
+          </mat-tab-group>
+      }
+    </section>
+  }
+</section>

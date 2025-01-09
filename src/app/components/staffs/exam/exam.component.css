@@ -1,0 +1,84 @@
+.exam-card{
+  width: 300px;
+  margin: 10px;
+}
+
+.name{
+  font-size: 1rem;
+  color: #7c3aed;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  width: 100%;
+}
+
+.card content{
+  display: flex;
+  flex-direction: column;
+}
+
+.score-content{
+  display: flex;
+}
+
+.score-values{
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+}
+
+.pos-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+}
+
+.pos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ec4899;
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.list-section {
+  background-color: #f5f3ff;
+  border-radius: 12px;
+  padding: 15px;
+  border: 2px solid #d8b4fe;
+}
+
+.note {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 8px;
+  padding: 5px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.note-title {
+  color: #8b5cf6;
+}
+
+.note-value {
+  color: #6d28d9;
+}
+
+.position {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+
+.mat-mdc-card {
+  background-color: white !important;
+  border-color: red !important;
+}

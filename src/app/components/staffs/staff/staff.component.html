@@ -1,0 +1,22 @@
+<a class="card" routerLink="/staff/{{staff.id}}">
+  <mat-card appearance="raised" class="staff-card">
+    <mat-card-header><span class="name">{{ staff.name }} {{ staff.surname }}</span></mat-card-header>
+    <mat-card-content>
+      <section class="card-content">
+        <span class="dni">DNI: {{ staff.dni }}</span>
+        <p class="dni">{{ getStaffType() }}</p>
+        <div class="lists-card">
+          <div class="list-section">
+            <div class="list-title">Listas</div>
+            <div class="note">
+              <span class="note-title">{{staff.name}} aparece en <span class="note-value">{{staff.exams}}</span> {{staff.exams == 1 ? 'lista' : 'listas'}} de concurso oposición</span>
+            </div>
+            <div class="note">
+              <span class="note-title">{{staff.name}} aparece en <span class="note-value">{{staff.jobBanks + staff.specificJobBanks}}</span> {{staff.jobBanks + staff.specificJobBanks == 1 ? 'bolsa' : 'bolsas'}}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</a>

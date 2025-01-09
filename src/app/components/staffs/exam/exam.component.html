@@ -1,0 +1,29 @@
+<mat-card appearance="raised" class="exam-card">
+  <mat-card-header><span class="name">{{getTitle()}}</span></mat-card-header>
+  <mat-card-content>
+    <section class="card-content">
+      <div class="score-card">
+        <div class="list-section">
+          <div class="note">
+            <span class="note-title">Nota opos.:</span>
+            <span class="note-value">{{exam.op}}</span>
+          </div>
+          <div class="note">
+            <span class="note-title">Nota conc.:</span>
+            <span class="note-value">{{exam.con}}</span>
+          </div>
+          <div class="note">
+            <span class="note-title">Nota total:</span>
+            <span class="note-value">{{exam.total}}</span>
+          </div>
+          <div class="position">
+            <div class="pos">
+              <span>Posición</span>
+              <span>{{ exam.position }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,68 @@
+<section class="home-section">
+  <div class="home-title">Información de candidatos a personal del SAS</div>
+  <form class="search-form" [formGroup]="form" (ngSubmit)="save()">
+    <mat-form-field appearance="outline">
+      <mat-label>Apellidos</mat-label>
+      <input type="text" matInput formControlName="surname">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input type="text" matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Categoría</mat-label>
+      <mat-select formControlName="type">
+        <mat-option [value]=""></mat-option>
+        <mat-option [value]="'NURSE'">Enfermera/o</mat-option>
+        <mat-option [value]="'TCAE'">TCAE</mat-option>
+        <mat-option [value]="'FISIO'">Fisioterapeuta</mat-option>
+        <mat-option [value]="'SPEECH_THERAPIST'">Logopeda</mat-option>
+        <mat-option [value]="'OCCUPATIONAL_THERAPY'">Terapeuta ocupacional</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="submit-button" type="submit" mat-flat-button [disabled]="loading | async">Buscar</button>
+  </form>
+
+  @if ((staffs | async)?.length == 0 && !(loading | async)) {
+    <div class="alert note">
+        <span class="alert-text">
+            Nota: El nombre y la categoría profesional son opcionales
+        </span>
+    </div>
+    <div class="info-section">
+      <p class="info-text">
+        Consulta la informacion sobre personal sanitario en las listas oficiales del Servicio Andaluz de Salud. El buscador incluye a los siguientes profesionales:
+      </p>
+      <p  class="staff-category">
+        <span>Enfermero/a</span>
+      </p>
+      <p  class="staff-category">
+        <span>Fisioterapeuta</span>
+      </p>
+      <p  class="staff-category">
+        <span>Logopeda</span>
+      </p>
+      <p  class="staff-category">
+        <span>Terapeuta Ocupacional</span>
+      </p>
+      <p class="staff-category">
+        <span>Técnico/a en Cuidados Auxiliares de Enfermería</span>
+      </p>
+    </div>
+  }
+
+  @if (loading | async) {
+    <div class="spinner"><mat-spinner></mat-spinner>.</div>
+  } @else if((staffs | async) != null && (staffs | async)!.length > 0){
+    <div class="alert see-details">
+        <span class="alert-text">
+            Pincha en el profesional para ver los detalles
+        </span>
+    </div>
+    <section class="staffs-section">
+      @for (staff of (staffs | async); track $index) {
+        <staff [staff]="staff"/>
+      }
+    </section>
+  }
+</section>
