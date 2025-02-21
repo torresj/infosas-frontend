@@ -53,7 +53,6 @@ export class StaffPageComponent implements OnInit{
         next: staff => {
           this.staff$.next(staff);
           this.loading$.next(false);
-          console.log(staff)
         },
         error: e => {
           console.error(e);

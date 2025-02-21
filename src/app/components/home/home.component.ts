@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {AsyncPipe} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
-import {MatIcon} from "@angular/material/icon";
-import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatSelectModule} from '@angular/material/select'
@@ -19,13 +19,11 @@ import {StaffComponent} from '../staffs/staff/staff.component';
     AsyncPipe,
     FormsModule,
     MatFormField,
-    MatIcon,
-    MatIconButton,
     MatInput,
     MatLabel,
     MatProgressSpinner,
-    MatSuffix,
     ReactiveFormsModule,
+    MatSnackBarModule,
     StaffComponent,
     MatButton,
     MatSelectModule
@@ -37,6 +35,7 @@ import {StaffComponent} from '../staffs/staff/staff.component';
 export class HomeComponent {
   staffs = new BehaviorSubject<Staff[]>([]);
   loading = new BehaviorSubject<boolean>(false);
+  private _snackBar = inject(MatSnackBar);
 
   form: FormGroup;
 
@@ -48,12 +47,22 @@ export class HomeComponent {
     });
   }
 
-  save(){
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, { duration: 5000, verticalPosition: "top" });
+  }
+
+  search(){
     this.loading.next(true);
     if(this.form.valid){
-      this.staffService.getStaffs$(this.form.value.name,this.form.value.surname, this.form.value.type).subscribe(staffs => {
+      const name = this.form.value.name;
+      const surname = this.form.value.surname;
+      const type = this.form.value.type;
+      this.staffService.getStaffs$(name, surname, type).subscribe(staffs => {
           this.loading.next(false);
           this.staffs.next(staffs);
+          if( staffs.length == 0){
+            this.openSnackBar(`No se encontraron datos para ${name} ${surname}`,"Cerrar");
+          }
         }
       );
     }else{
