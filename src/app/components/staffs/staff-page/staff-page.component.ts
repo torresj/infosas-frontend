@@ -14,6 +14,7 @@ import {MatBadge} from '@angular/material/badge';
 import {ExamComponent} from '../exam/exam.component';
 import {JobBankComponent} from '../job-bank/job-bank.component';
 import {SpecificJobBankComponent} from '../specific-job-bank/specific-job-bank.component';
+import StaffExam from '../../../models/staffExam';
 
 @Component({
   selector: 'app-staff-page',
@@ -64,5 +65,9 @@ export class StaffPageComponent implements OnInit{
 
   onBackClick() {
     this.router.navigate(['/'])
+  }
+
+  hasDefinitiveList(exams: Array<StaffExam>): boolean {
+    return exams.some(exam => !exam.provisional);
   }
 }
