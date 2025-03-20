@@ -37,4 +37,8 @@ export class JobBankComponent {
       case StaffJobBankType.SPEECH_THERAPIST: return "Bolsa de logopedia";
     }
   }
+
+  getSubTitle(): string{
+    return this.jobBank.provisional ? 'Listado provisional' : 'Listado definitivo'
+  }
 }

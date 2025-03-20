@@ -66,8 +66,4 @@ export class StaffPageComponent implements OnInit{
   onBackClick() {
     this.router.navigate(['/'])
   }
-
-  hasDefinitiveList(exams: Array<StaffExam>): boolean {
-    return exams.some(exam => !exam.provisional);
-  }
 }

@@ -13,4 +13,5 @@ export default interface StaffSpecificJobBank{
   formation: number;
   others: number;
   total: number;
+  provisional: boolean;
 }

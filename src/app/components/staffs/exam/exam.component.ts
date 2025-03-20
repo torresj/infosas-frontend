@@ -20,8 +20,12 @@ export class ExamComponent {
 
   getTitle(): string{
     switch (this.exam.type){
-      case StaffExamType.NURSE: return this.exam.provisional ? "Enfemería: Lista provisional" : "Enfermería: Lista definitiva";
-      case StaffExamType.TCAE: return this.exam.provisional ? "TCAE: Lista provisional" : "TCAE: Lista definitiva";
+      case StaffExamType.NURSE: return 'Enfermería';
+      case StaffExamType.TCAE: return 'TCAE';
     }
+  }
+
+  getSubTitle(): string{
+    return this.exam.provisional ? 'Listado provisional' : 'Listado definitivo'
   }
 }

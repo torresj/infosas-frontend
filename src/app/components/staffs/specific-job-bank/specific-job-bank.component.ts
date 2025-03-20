@@ -33,5 +33,9 @@ export class SpecificJobBankComponent {
     }
   }
 
+  getSubTitle(): string{
+    return this.jobBank.provisional ? 'Listado provisional' : 'Listado definitivo'
+  }
+
   protected readonly Status = Status;
 }

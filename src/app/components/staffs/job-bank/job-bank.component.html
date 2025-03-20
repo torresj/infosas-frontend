@@ -1,5 +1,10 @@
 <mat-card appearance="raised" class="jobbank-card">
-  <mat-card-header><span class="name">{{getTitle()}}</span></mat-card-header>
+  <mat-card-header>
+    <div class="card-header">
+      <span class="name">{{getTitle()}}</span>
+      <span class="provisional">{{getSubTitle()}}</span>
+    </div>
+  </mat-card-header>
   <mat-card-content>
     <section class="card-content">
       <div class="score-card">

@@ -13,17 +13,15 @@
           <mat-tab-group class="tabs">
             <mat-tab>
               <ng-template mat-tab-label>
-                <div matBadge="{{hasDefinitiveList(staff.staffExams) ? 1 : 0}}" matBadgeOverlap="false">Oposición</div>
+                <div matBadge="{{staff.staffExams.length}}" matBadgeOverlap="false">Oposición</div>
               </ng-template>
               <section class="list">
-                @if (!hasDefinitiveList(staff.staffExams)){
-                  <div class="empty-list">No hay datos de {{staff.name}} en la lista definitiva de ninguna oposición</div>
+                @if (staff.staffExams.length == 0){
+                  <div class="empty-list">No hay datos de {{staff.name}} en ninguna oposición</div>
                 }
                 @else {
                   @for (exam of staff.staffExams; track $index) {
-                    @if (!exam.provisional) {
-                      <exam [exam]="exam"/>
-                    }
+                    <exam [exam]="exam"/>
                   }
                 }
               </section>
