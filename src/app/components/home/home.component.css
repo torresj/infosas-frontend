@@ -134,3 +134,7 @@ mdc-floating-label{
 .mat-mdc-unelevated-button:not(:disabled){
   background-color: #6b21a8 !important;
 }
+
+.mat-mdc-floating-label{
+  color: white !important;
+}
