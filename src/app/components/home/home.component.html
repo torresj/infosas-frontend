@@ -3,15 +3,18 @@
   <form class="search-form" [formGroup]="form" (ngSubmit)="search()">
     <mat-form-field appearance="outline">
       <mat-label>Apellidos</mat-label>
-      <input type="text" matInput formControlName="surname">
+      <input type="text" matInput formControlName="surname" id="surname" (input)="onInputChange()">
+      @if (submit && form.hasError('requiredFields')) {
+        <span class="error">El apellido o el dni es obligatorio</span>
+      }
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Nombre</mat-label>
-      <input type="text" matInput formControlName="name">
+      <input type="text" matInput formControlName="name" id="name" (input)="onInputChange()">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Categoría</mat-label>
-      <mat-select formControlName="type">
+      <mat-select formControlName="type" id="type" (selectionChange)="onInputChange()">
         <mat-option [value]=""></mat-option>
         <mat-option [value]="'NURSE'">Enfermera/o</mat-option>
         <mat-option [value]="'TCAE'">TCAE</mat-option>
@@ -19,6 +22,14 @@
         <mat-option [value]="'SPEECH_THERAPIST'">Logopeda</mat-option>
         <mat-option [value]="'OCCUPATIONAL_THERAPY'">Terapeuta ocupacional</mat-option>
       </mat-select>
+    </mat-form-field>
+    <div class="or">- O BUSCAR POR -</div>
+    <mat-form-field appearance="outline">
+      <mat-label>DNI</mat-label>
+      <input type="text" matInput formControlName="dni" id="dni" (input)="onInputChange()">
+      @if (submit && form.hasError('requiredFields')) {
+        <span class="error">El apellido o el dni es obligatorio</span>
+      }
     </mat-form-field>
     <button class="submit-button" type="submit" mat-flat-button [disabled]="loading | async">Buscar</button>
   </form>

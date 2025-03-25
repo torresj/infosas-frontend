@@ -93,6 +93,19 @@
   margin-top: 30px;
 }
 
+.or{
+  width: 100%;
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.error{
+  color: rgb(200, 0, 0);
+  font-size: 0.8em;
+  padding-top: -20px;
+}
+
 .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
 .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
   border-color: #d8b4fe !important;
