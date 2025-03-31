@@ -17,10 +17,18 @@
       <mat-select formControlName="type" id="type" (selectionChange)="onInputChange()">
         <mat-option [value]=""></mat-option>
         <mat-option [value]="'NURSE'">Enfermera/o</mat-option>
-        <mat-option [value]="'TCAE'">TCAE</mat-option>
         <mat-option [value]="'FISIO'">Fisioterapeuta</mat-option>
         <mat-option [value]="'SPEECH_THERAPIST'">Logopeda</mat-option>
         <mat-option [value]="'OCCUPATIONAL_THERAPY'">Terapeuta ocupacional</mat-option>
+        <mat-option [value]="'TCAE'">Técnico/a en Cuidados Auxiliares de Enfermería</mat-option>
+        <mat-option [value]="'TEAP'">Técnico/a Especialista en Anatomía Patológica</mat-option>
+        <mat-option [value]="'TEDN'">Técnico/a Especialista Dietética y Nutrición</mat-option>
+        <mat-option [value]="'TEDS'">Técnico/a Especialista en Documentación Sanitaria</mat-option>
+        <mat-option [value]="'TEL'">Técnico/a Especialista en Laboratorio</mat-option>
+        <mat-option [value]="'TEMN'">Técnico/a Especialista en Medicina Nuclear</mat-option>
+        <mat-option [value]="'TERD'">Técnico/a Especialista en Radioterapia</mat-option>
+        <mat-option [value]="'TER'">Técnico/a Especialista en Radiodiagnóstico</mat-option>
+        <mat-option [value]="'TF'">Técnico/a en Farmacia</mat-option>
       </mat-select>
     </mat-form-field>
     <div class="or">- O BUSCAR POR -</div>
@@ -45,10 +53,10 @@
         Consulta la información sobre personal sanitario del Servicio Andaluz de Salud. Los datos están extraídos de las listas oficiales de concurso oposición y bolsa:
       </p>
       <a  class="staff-category" target="_blank" href="https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/profesionales/ofertas-de-empleo/oferta-de-empleo-publico-puestos-base/oep-extraordinaria-decreto-ley-122022-centros-sas/cuadro-de-evolucion-concurso-oposicion-centros-sas">
-        <span>Cuadro de evolución Concurso-oposición</span>
+        <span>Cuadro de evolución concurso-oposición</span>
       </a>
       <a  class="staff-category" target="_blank" href="https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/profesionales/ofertas-de-empleo/bolsa-de-empleo/cuadro-de-evolucion-2023">
-        <span>Cuadro de evolución de bolsa de empleo</span>
+        <span>Cuadro de evolución de bolsa de empleo con corte en 2023</span>
       </a>
     </div>
   }

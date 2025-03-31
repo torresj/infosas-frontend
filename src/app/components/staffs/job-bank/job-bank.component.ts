@@ -26,7 +26,7 @@ export class JobBankComponent {
   getTitle(): string{
     switch (this.jobBank.type){
       case StaffJobBankType.NURSE: return "Bolsa de enfermería";
-      case StaffJobBankType.TCAE: return "Bolsa de TCAE";
+      case StaffJobBankType.TCAE: return "Bolsa de técnico/a en cuidados auxiliares de enfermería";
       case StaffJobBankType.NURSE_FAMILY: return "Bolsa especialista en enfermería familiar y comunitaria";
       case StaffJobBankType.NURSE_GYNECOLOGY: return "Bolsa especialista en enfermería obstétrico-ginecológica (matrón/a)"
       case StaffJobBankType.NURSE_MENTAL_HEALTH: return "Bolsa especialista en enfermería de salud mental";
@@ -35,6 +35,14 @@ export class JobBankComponent {
       case StaffJobBankType.FISIO: return "Bolsa de fisioterapia";
       case StaffJobBankType.OCCUPATIONAL_THERAPY: return "Bolsa de terapia ocupacional";
       case StaffJobBankType.SPEECH_THERAPIST: return "Bolsa de logopedia";
+      case StaffJobBankType.TEAP: return "Bolsa de técnico/a especialista en anatomía patológica";
+      case StaffJobBankType.TEDN: return "Bolsa de técnico/a especialista en dietética y nutrición";
+      case StaffJobBankType.TEDS: return "Bolsa de técnico/a especialista en documentación sanitaria";
+      case StaffJobBankType.TEL: return "Bolsa de técnico/a especialista en laboratorio";
+      case StaffJobBankType.TEMN: return "Bolsa de técnico/a especialista en medicina nuclear";
+      case StaffJobBankType.TER: return "Bolsa de técnico/a especialista en radioterapia";
+      case StaffJobBankType.TERD: return "Bolsa de técnico/a especialista en radiodiagnóstico";
+      case StaffJobBankType.TF: return "Bolsa de técnico/a especialista en farmacia";
     }
   }
 
