@@ -23,10 +23,18 @@ export class StaffComponent {
   getStaffType(): string {
     switch (this.staff.type){
       case StaffType.FISIO: return "Fisioterapeuta";
-      case StaffType.TCAE: return "TCAE";
+      case StaffType.TCAE: return "Técnico/a en Cuidados Auxiliares de Enfermería";
       case StaffType.OCCUPATIONAL_THERAPY: return "Terapeuta ocupacional";
       case StaffType.NURSE: return "Enfermero/a";
       case StaffType.SPEECH_THERAPIST: return "Logopeda";
+      case StaffType.TEAP: return "Técnico/a Especialista en Anatomía Patológica";
+      case StaffType.TEDN: return "Técnico/a Especialista Dietética y Nutrición";
+      case StaffType.TEDS: return "Técnico/a Especialista en Documentación Sanitaria";
+      case StaffType.TEL: return "Técnico/a Especialista en Laboratorio";
+      case StaffType.TEMN: return "Técnico/a Especialista en Medicina Nuclear";
+      case StaffType.TER: return "Técnico/a Especialista en Radioterapia";
+      case StaffType.TERD: return "Técnico/a Especialista en Radiodiagnóstico";
+      case StaffType.TF: return "Técnico/a en Farmacia";
     }
   }
 
