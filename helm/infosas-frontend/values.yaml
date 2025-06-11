@@ -46,7 +46,7 @@ ingress:
   enabled: true
   controller:
     class: nginx
-  host: infosas.es
+  host: test.infosas.es
   path: /
   tls:
     enabled: true
