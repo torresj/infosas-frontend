@@ -8,4 +8,5 @@ export default interface StaffExam{
   op: number;
   con: number;
   position: number;
+  examYear: number;
 }

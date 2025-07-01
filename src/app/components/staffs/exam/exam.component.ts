@@ -26,6 +26,8 @@ export class ExamComponent {
   }
 
   getSubTitle(): string{
-    return this.exam.provisional ? 'Listado provisional' : 'Listado definitivo'
+    return this.exam.provisional
+        ? 'Listado provisional ' + this.exam.examYear
+        : 'Listado definitivo ' + this.exam.examYear;
   }
 }

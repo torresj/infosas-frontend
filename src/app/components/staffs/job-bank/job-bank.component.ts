@@ -47,6 +47,8 @@ export class JobBankComponent {
   }
 
   getSubTitle(): string{
-    return this.jobBank.provisional ? 'Listado provisional' : 'Listado definitivo'
+    return this.jobBank.provisional
+        ? 'Listado provisional ' + this.jobBank.cutOffYear
+        : 'Listado definitivo ' + this.jobBank.cutOffYear;
   }
 }

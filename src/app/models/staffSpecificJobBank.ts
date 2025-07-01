@@ -14,4 +14,5 @@ export default interface StaffSpecificJobBank{
   others: number;
   total: number;
   provisional: boolean;
+  cutOffYear: number;
 }
