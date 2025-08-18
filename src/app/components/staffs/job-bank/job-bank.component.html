@@ -19,18 +19,20 @@
             <span class="note-value">{{jobBank.status}}</span>
           </div>
           @if (jobBank.status == Status.EXCLUIDA){
-            <div class="note">
-              <span class="note-title">Código de exclusión:</span>
-              <span class="note-value">{{jobBank.exclusionReason.code}}</span>
-            </div>
-            <mat-accordion>
-              <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-                <mat-expansion-panel-header>
-                  <mat-panel-title class="exclusion-title">Motivo de exclusión</mat-panel-title>
-                </mat-expansion-panel-header>
-                <p class="exclusion-reason-text">{{jobBank.exclusionReason.reason}}</p>
-              </mat-expansion-panel>
-            </mat-accordion>
+              @for (exclusion of jobBank.exclusionReasons; track exclusion){
+                  <div class="note exclusion-reason">
+                      <span class="note-title">Código de exclusión:</span>
+                      <span class="note-value">{{exclusion.code}}</span>
+                  </div>
+                  <mat-accordion>
+                      <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                          <mat-expansion-panel-header>
+                              <mat-panel-title class="exclusion-title">Motivo de exclusión</mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <p class="exclusion-reason-text">{{exclusion.reason}}</p>
+                      </mat-expansion-panel>
+                  </mat-accordion>
+              }
           }
         </div>
       </div>

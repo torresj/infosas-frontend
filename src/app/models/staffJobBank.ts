@@ -7,7 +7,7 @@ export default interface StaffJobBank{
   shift: string;
   status: Status;
   type: StaffJobBankType;
-  exclusionReason: ExclusionReason;
+  exclusionReasons: ExclusionReason[];
   experience: number;
   formation: number;
   others: number;
