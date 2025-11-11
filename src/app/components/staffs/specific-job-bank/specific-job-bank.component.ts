@@ -2,8 +2,8 @@ import {Component, Input, signal, ViewEncapsulation} from '@angular/core';
 import StaffSpecificJobBank from '../../../models/staffSpecificJobBank';
 import {MatCard, MatCardContent, MatCardHeader} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {StaffSpecificJobBankType} from '../../../models/staffSpecificJobBankType';
 import {Status} from '../../../models/status';
+import {SasType} from "../../../models/SasType";
 
 @Component({
   selector: 'specific-job-bank',
@@ -24,12 +24,13 @@ export class SpecificJobBankComponent {
 
   getTitle(): string{
     switch (this.jobBank.type){
-      case StaffSpecificJobBankType.NURSE_CRITICS: return "Bolsa área de cuidados críticos ";
-      case StaffSpecificJobBankType.NURSE_DIALYSIS: return "Bolsa área de diálisis";
-      case StaffSpecificJobBankType.NURSE_NEONATES: return "Bolsa área de Nenonatología";
-      case StaffSpecificJobBankType.NURSE_NUCLEAR: return "Bolsa área de medicina nuclear";
-      case StaffSpecificJobBankType.NURSE_MENTAL_HEALTH: return "Bolsa área de salud mental";
-      case StaffSpecificJobBankType.NURSE_SURGERY_ROOM: return "Bolsa área de quirófano";
+      case SasType.NURSE_CRITICS_SPECIFIC_JOB_BANK: return "Bolsa área de cuidados críticos ";
+      case SasType.NURSE_DIALYSIS_SPECIFIC_JOB_BANK: return "Bolsa área de diálisis";
+      case SasType.NURSE_NEONATES_SPECIFIC_JOB_BANK: return "Bolsa área de Nenonatología";
+      case SasType.NURSE_NUCLEAR_SPECIFIC_JOB_BANK: return "Bolsa área de medicina nuclear";
+      case SasType.NURSE_MENTAL_HEALTH_SPECIFIC_JOB_BANK: return "Bolsa área de salud mental";
+      case SasType.NURSE_SURGERY_ROOM_SPECIFIC_JOB_BANK: return "Bolsa área de quirófano";
+      default: return "";
     }
   }
 

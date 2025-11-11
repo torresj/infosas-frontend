@@ -1,13 +1,13 @@
 import {Status} from './status';
 import ExclusionReason from './exclusionReason';
-import {StaffSpecificJobBankType} from './staffSpecificJobBankType';
+import {SasType} from "./SasType";
 
 export default interface StaffSpecificJobBank{
   treaty: string;
   shift: string;
   general_admission: Status;
   specific_admission: Status;
-  type: StaffSpecificJobBankType;
+  type: SasType;
   exclusionReasons: ExclusionReason[];
   experience: number;
   formation: number;

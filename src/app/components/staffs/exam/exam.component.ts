@@ -1,7 +1,7 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 import StaffExam from '../../../models/staffExam';
 import {MatCard, MatCardContent, MatCardHeader} from '@angular/material/card';
-import {StaffExamType} from '../../../models/staffExamType';
+import {SasType} from "../../../models/SasType";
 
 @Component({
   selector: 'exam',
@@ -20,8 +20,9 @@ export class ExamComponent {
 
   getTitle(): string{
     switch (this.exam.type){
-      case StaffExamType.NURSE: return 'Enfermería';
-      case StaffExamType.TCAE: return 'TCAE';
+      case SasType.NURSE_EXAM: return 'Enfermería';
+      case SasType.TCAE_EXAM: return 'TCAE';
+      default: return "";
     }
   }
 

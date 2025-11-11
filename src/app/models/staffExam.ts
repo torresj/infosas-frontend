@@ -1,7 +1,8 @@
-import {StaffExamType} from './staffExamType';
+import {SasType} from "./SasType";
+
 
 export default interface StaffExam{
-  type: StaffExamType;
+  type: SasType;
   shift: string;
   provisional: boolean;
   total: number;
