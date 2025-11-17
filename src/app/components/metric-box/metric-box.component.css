@@ -1,21 +1,23 @@
 .stat-box {
     background: rgba(255, 255, 255, 0.25);
     border-radius: 16px;
-    padding: 20px;
+    padding: 15px 10px;
     text-align: center;
     color: white;
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
+    margin: 10px 5px;
 }
 
 .value {
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: 700;
+    margin-bottom: 5px;
 }
 
 .label {
-    font-size: 1rem;
+    font-size: 0.8rem;
     opacity: 0.8;
-    margin-top: 4px;
+    line-height: 1;
+    text-align: center;
 }
