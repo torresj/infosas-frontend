@@ -13,22 +13,6 @@
           <mat-tab-group class="tabs">
             <mat-tab>
               <ng-template mat-tab-label>
-                <div matBadge="{{staff.staffExams.length}}" matBadgeOverlap="false">Oposición</div>
-              </ng-template>
-              <section class="list">
-                @if (staff.staffExams.length == 0){
-                  <div class="empty-list">No hay datos de {{staff.name}} en ninguna oposición</div>
-                }
-                @else {
-                  @for (exam of staff.staffExams; track $index) {
-                    <exam [exam]="exam"/>
-                  }
-                }
-              </section>
-            </mat-tab>
-
-            <mat-tab>
-              <ng-template mat-tab-label>
                 <div matBadge="{{staff.staffJobBanks.length}}" matBadgeOverlap="false">Bolsas</div>
               </ng-template>
               <section class="list">
@@ -58,6 +42,21 @@
                 }
               </section>
             </mat-tab>
+              <mat-tab>
+                  <ng-template mat-tab-label>
+                      <div matBadge="{{staff.staffExams.length}}" matBadgeOverlap="false">Oposición</div>
+                  </ng-template>
+                  <section class="list">
+                      @if (staff.staffExams.length == 0){
+                          <div class="empty-list">No hay datos de {{staff.name}} en ninguna oposición</div>
+                      }
+                      @else {
+                          @for (exam of staff.staffExams; track $index) {
+                              <exam [exam]="exam"/>
+                          }
+                      }
+                  </section>
+              </mat-tab>
           </mat-tab-group>
       }
     </section>

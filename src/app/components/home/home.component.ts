@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {AsyncPipe} from "@angular/common";
-import {AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButton, MatButtonModule} from "@angular/material/button";
@@ -11,35 +11,41 @@ import {BehaviorSubject} from 'rxjs';
 import {StaffService} from '../../services/staff.service';
 import Staff from '../../models/staff';
 import {StaffComponent} from '../staffs/staff/staff.component';
-import { MatDialog , MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
+import { MatDialog , MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
+import {MetricsService} from "../../services/metrics.service";
+import Metrics from "../../models/metrics";
+import {MetricBoxComponent} from "../metric-box/metric-box.component";
+import {StateService} from "../../services/state.service";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    AsyncPipe,
-    FormsModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatProgressSpinner,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    StaffComponent,
-    MatButton,
-    MatSelectModule
-  ],
+    imports: [
+        AsyncPipe,
+        FormsModule,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        MatProgressSpinner,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        StaffComponent,
+        MatButton,
+        MatSelectModule,
+        MetricBoxComponent
+    ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   readonly dialog = inject(MatDialog);
 
   staffs = new BehaviorSubject<Staff[]>([]);
+  metrics = new BehaviorSubject<Metrics | null>(null);
   loading = new BehaviorSubject<boolean>(false);
   private _snackBar = inject(MatSnackBar);
   submit = false;
@@ -47,7 +53,9 @@ export class HomeComponent {
   form: FormGroup;
 
   constructor(
-    private staffService: StaffService
+    private staffService: StaffService,
+    private metricsService: MetricsService,
+    private stateService: StateService
   ) {
    this.form = new FormGroup({
       name: new FormControl(''),
@@ -56,6 +64,21 @@ export class HomeComponent {
       dni: new FormControl('')
     }, { validators: this.customValidator()});
   }
+
+    ngOnInit(): void {
+        this.metricsService.getMetrics$().subscribe(metrics => {
+            this.metrics.next(metrics);
+        })
+        if(this.stateService.staffs.length != 0){
+            this.form.patchValue({
+                name: this.stateService.name,
+                surname: this.stateService.surname,
+                type: this.stateService.type,
+                dni: this.stateService.dni
+            });
+            this.staffs.next(this.stateService.staffs);
+        }
+    }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, { duration: 5000, verticalPosition: "top" });
@@ -95,6 +118,12 @@ export class HomeComponent {
           }
           if( staffs.length == 0){
             this.openSnackBar(`No se encontraron datos para ${name} ${surname}`,"Cerrar");
+          } else{
+              this.stateService.name = name;
+              this.stateService.surname = surname;
+              this.stateService.type = type;
+              this.stateService.staffs = staffs;
+              this.stateService.dni = dni;
           }
         }
       );

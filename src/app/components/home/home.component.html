@@ -1,5 +1,10 @@
 <section class="home-section">
   <div class="home-title">Información de candidatos a personal del SAS</div>
+    <div class="metrics-section">
+        <metric-box [value]="(metrics | async)?.staffs" label="Profesionales sanitarios"/>
+        <metric-box [value]="(metrics | async)?.exams" label="Profesionales en oposiciones"/>
+        <metric-box [value]="(metrics | async)?.totalJobBanks" label="Profesionales en bolsas"/>
+    </div>
   <form class="search-form" [formGroup]="form" (ngSubmit)="search()">
     <mat-form-field appearance="outline">
       <mat-label>Apellidos</mat-label>
