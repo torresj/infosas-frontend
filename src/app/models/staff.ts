@@ -4,7 +4,7 @@ export default interface Staff{
   id: number;
   name: string;
   surname: string;
-  type: StaffType;
+  types: [StaffType];
   dni: string;
   exams: number
   jobBanks: number;

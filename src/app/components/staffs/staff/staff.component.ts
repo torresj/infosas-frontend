@@ -20,55 +20,58 @@ import StaffExam from '../../../models/staffExam';
 export class StaffComponent {
   @Input() staff!: Staff
 
+
+    typeToLabel: Record<StaffType, string> = {
+        [StaffType.FISIO]: "Fisioterapeuta",
+        [StaffType.TCAE]: "Técnico/a en Cuidados Auxiliares de Enfermería",
+        [StaffType.OCCUPATIONAL_THERAPY]: "Terapeuta ocupacional",
+        [StaffType.NURSE]: "Enfermero/a",
+        [StaffType.SPEECH_THERAPIST]: "Logopeda",
+        [StaffType.TEAP]: "Técnico/a Especialista en Anatomía Patológica",
+        [StaffType.TEDN]: "Técnico/a Especialista Dietética y Nutrición",
+        [StaffType.TEDS]: "Técnico/a Especialista en Documentación Sanitaria",
+        [StaffType.TEL]: "Técnico/a Especialista en Laboratorio",
+        [StaffType.TEMN]: "Técnico/a Especialista en Medicina Nuclear",
+        [StaffType.TER]: "Técnico/a Especialista en Radioterapia",
+        [StaffType.TERD]: "Técnico/a Especialista en Radiodiagnóstico",
+        [StaffType.TF]: "Técnico/a en Farmacia",
+        [StaffType.PODIATRIST]: "Podólogo/a",
+        [StaffType.TSESPC]: "Téc. Salud Educación para la Salud y Participación Comunitaria",
+        [StaffType.TSSA]: "Téc. Salud Sanidad Ambiental",
+        [StaffType.TSPRLPA]: "Técnico/a Superior en Prevención de Riesgos Laborales-Ergonomía y Psicosociología Aplicada",
+        [StaffType.TSPRLHI]: "Técnico/a Superior en Prevención de Riesgos Laborales-Higiene Industrial",
+        [StaffType.TSPRLST]: "Técnico/a Superior en Prevención de Riesgos Laborales-Seguridad en el Trabajo",
+        [StaffType.SOCIAL_WORKER]: "Trabajador/a Social",
+        [StaffType.ADM]: "Administrativo/a",
+        [StaffType.ADMINISTRATIVE_ASSISTANT]: "Auxiliar Administrativo/a",
+        [StaffType.CC]: "Celador/a Conductor/a",
+        [StaffType.CCUL]: "Celador/a-Conductor/a de Unidad Logística",
+        [StaffType.CCCTS]: "Celador/a-Conductor/a C.T.S.",
+        [StaffType.CCAA]: "Celador/a-Conductor/a de ambulancia asistencial tipo B y C",
+        [StaffType.COOK]: "Cocinero/a",
+        [StaffType.POC]: "Personal de Oficio Costurero/a",
+        [StaffType.MONITOR]: "Monitor/a",
+        [StaffType.POP]: "Personal de oficio Peluquero/a",
+        [StaffType.TEI]: "Técnico/a Especialista en Informática",
+        [StaffType.TSA]: "Técnico/a Superior en Alojamiento",
+        [StaffType.PHONE]: "Telefonista",
+        [StaffType.TEMEII]: "Técnico/a Especialista en Mantenimiento de Edificios e Instalaciones Industriales",
+        [StaffType.TEMEITF]: "T. E. M. E. I para Área de Instalaciones Térmicas y de Fluidos",
+        [StaffType.TEMEISEA]: "T. E. M. E. I. para Área de Sistemas Electrotécnicos y Automatizados",
+        [StaffType.TMAC]: "Técnico/a de Mantenimiento Acabados de Construcción",
+        [StaffType.TMMM]: "Técnico/a de Mantenimiento de Madera y Mueble",
+        [StaffType.TMOA]: "Técnico/a de Mantenimiento Obras de Albañilería",
+        [StaffType.TEE]: "Técnico/a Especialista en Electromedicina",
+        [StaffType.TIPRL]: "Técnico/a Intermedio/a en Prevención de Riesgos Laborales",
+        [StaffType.WARDEN]: "Celador/a",
+        [StaffType.CLEANER]: "Limpiador/a",
+        [StaffType.LAUNDRY_STAFF]: "Personal Lavandería - Planchado",
+        [StaffType.LABOURER]: "Peón",
+        [StaffType.HELPER]: "Pinche",
+    };
+
   getStaffType(): string {
-    switch (this.staff.type){
-        case StaffType.FISIO: return "Fisioterapeuta";
-        case StaffType.TCAE: return "Técnico/a en Cuidados Auxiliares de Enfermería";
-        case StaffType.OCCUPATIONAL_THERAPY: return "Terapeuta ocupacional";
-        case StaffType.NURSE: return "Enfermero/a";
-        case StaffType.SPEECH_THERAPIST: return "Logopeda";
-        case StaffType.TEAP: return "Técnico/a Especialista en Anatomía Patológica";
-        case StaffType.TEDN: return "Técnico/a Especialista Dietética y Nutrición";
-        case StaffType.TEDS: return "Técnico/a Especialista en Documentación Sanitaria";
-        case StaffType.TEL: return "Técnico/a Especialista en Laboratorio";
-        case StaffType.TEMN: return "Técnico/a Especialista en Medicina Nuclear";
-        case StaffType.TER: return "Técnico/a Especialista en Radioterapia";
-        case StaffType.TERD: return "Técnico/a Especialista en Radiodiagnóstico";
-        case StaffType.TF: return "Técnico/a en Farmacia";
-        case StaffType.PODIATRIST: return "Podólogo/a";
-        case StaffType.TSESPC: return  "Téc. Salud Educación para la Salud y Participación Comunitaria";
-        case StaffType.TSSA: return "Téc. Salud Sanidad Ambiental";
-        case StaffType.TSPRLPA: return "Técnico/a Superior en Prevención de Riesgos Laborales-Ergonomía y Psicosociología Aplicada";
-        case StaffType.TSPRLHI: return "Técnico/a Superior en Prevención de Riesgos Laborales-Higiene Industrial";
-        case StaffType.TSPRLST: return "Técnico/a Superior en Prevención de Riesgos Laborales-Seguridad en el Trabajo";
-        case StaffType.SOCIAL_WORKER: return "Trabajador/a Social";
-        case StaffType.ADM: return "Administrativo/a";
-        case StaffType.ADMINISTRATIVE_ASSISTANT: return "Auxiliar Administrativo/a";
-        case StaffType.CC: return "Celador/a Conductor/a";
-        case StaffType.CCUL: return "Celador/a-Conductor/a de Unidad Logística";
-        case StaffType.CCCTS: return "Celador/a-Conductor/a C.T.S.";
-        case StaffType.CCAA: return "Celador/a-Conductor/a de ambulancia asistencial tipo B y C";
-        case StaffType.COOK: return "Cocinero/a";
-        case StaffType.POC: return "Personal de Oficio Costurero/a";
-        case StaffType.MONITOR: return "Monitor/a";
-        case StaffType.POP: return "Personal de oficio Peluquero/a";
-        case StaffType.TEI: return "Técnico/a Especialista en Informática";
-        case StaffType.TSA: return "Técnico/a Superior en Alojamiento";
-        case StaffType.PHONE: return "Telefonista";
-        case StaffType.TEMEII: return "Técnico/a Especialista en Mantenimiento de Edificios e Instalaciones Industriales";
-        case StaffType.TEMEITF: return "T. E. M. E. I para Área de Instalaciones Térmicas y de Fluidos";
-        case StaffType.TEMEISEA: return "T. E. M. E. I. para Área de Sistemas Electrotécnicos y Automatizados";
-        case StaffType.TMAC: return "Técnico/a de Mantenimiento Acabados de Construcción";
-        case StaffType.TMMM: return "Técnico/a de Mantenimiento de Madera y Mueble";
-        case StaffType.TMOA: return "Técnico/a de Mantenimiento Obras de Albañilería";
-        case StaffType.TEE: return "Técnico/a Especialista en Electromedicina";
-        case StaffType.TIPRL: return "Técnico/a Intermedio/a en Prevención de Riesgos Laborales";
-        case StaffType.WARDEN: return "Celador/a";
-        case StaffType.CLEANER: return "Limpiador/a";
-        case StaffType.LAUNDRY_STAFF: return "Personal Lavandería - Planchado";
-        case StaffType.LABOURER: return "Peón";
-        case StaffType.HELPER: return "Pinche";
-    }
+      return this.staff.types.map(type => this.typeToLabel[type]).join(', ')
   }
 
   hasDefinitiveList(exams: Array<StaffExam>): boolean {
