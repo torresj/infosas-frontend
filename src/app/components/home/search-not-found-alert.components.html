@@ -1,0 +1,19 @@
+<section class="modern-dialog">
+    <h2 mat-dialog-title class="dialog-title">Ningún profesional encontrado</h2>
+    <mat-dialog-content class="dialog-content">
+        <p class="dialog-text">No se ha encontrado ningún profesional para los siguientes criterios de búsqueda</p>
+        <ul class="dialog-list">
+            @if (data.dni){
+                <li><strong>DNI</strong>: {{ data.dni }}</li>
+            } @else {
+                <li><strong>Nombre:</strong> {{ data.name }}</li>
+                <li><strong>Apellidos:</strong> {{ data.surname }}</li>
+                <li><strong>Categoría:</strong> {{ data.type ? getStaffTypeLabel(data.type!) : '' }}</li>
+            }
+        </ul>
+        <p class="dialog-text">Por favor, revisa los datos por si hay algún error.</p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btn-accept" (click)="dialogRef.close()">Aceptar</button>
+    </mat-dialog-actions>
+</section>

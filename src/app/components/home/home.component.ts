@@ -2,7 +2,6 @@ import {ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation} f
 import {AsyncPipe} from "@angular/common";
 import {AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButton, MatButtonModule} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
@@ -11,11 +10,20 @@ import {BehaviorSubject} from 'rxjs';
 import {StaffService} from '../../services/staff.service';
 import Staff from '../../models/staff';
 import {StaffComponent} from '../staffs/staff/staff.component';
-import { MatDialog , MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
+import {
+    MAT_DIALOG_DATA,
+    MatDialog,
+    MatDialogActions,
+    MatDialogContent,
+    MatDialogRef,
+    MatDialogTitle
+} from '@angular/material/dialog';
 import {MetricsService} from "../../services/metrics.service";
 import Metrics from "../../models/metrics";
 import {MetricBoxComponent} from "../metric-box/metric-box.component";
 import {StateService} from "../../services/state.service";
+import SearchData from "../../models/searcData";
+import {StaffType} from "../../models/staffType";
 
 
 @Component({
@@ -29,7 +37,6 @@ import {StateService} from "../../services/state.service";
         MatLabel,
         MatProgressSpinner,
         ReactiveFormsModule,
-        MatSnackBarModule,
         StaffComponent,
         MatButton,
         MatSelectModule,
@@ -47,7 +54,6 @@ export class HomeComponent implements OnInit{
   staffs = new BehaviorSubject<Staff[]>([]);
   metrics = new BehaviorSubject<Metrics | null>(null);
   loading = new BehaviorSubject<boolean>(false);
-  private _snackBar = inject(MatSnackBar);
   submit = false;
 
   form: FormGroup;
@@ -79,10 +85,6 @@ export class HomeComponent implements OnInit{
             this.staffs.next(this.stateService.staffs);
         }
     }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, { duration: 5000, verticalPosition: "top" });
-  }
 
   onInputChange() {
     if (this.isPersonalFieldsFilled()) {
@@ -117,7 +119,14 @@ export class HomeComponent implements OnInit{
             this.dialog.open(DniAlertComponent)
           }
           if( staffs.length == 0){
-            this.openSnackBar(`No se encontraron datos para ${name} ${surname}`,"Cerrar");
+            this.dialog.open(SearchNotFoundAlertComponent, {
+                data: {
+                    name: name,
+                    surname: surname,
+                    type: type,
+                    dni: dni
+                }
+            })
           } else{
               this.stateService.name = name;
               this.stateService.surname = surname;
@@ -157,10 +166,77 @@ export class HomeComponent implements OnInit{
 @Component({
   selector: 'dni-alert',
   templateUrl: 'dni-alert.components.html',
+  styleUrl: 'dni-alert.components.css',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DniAlertComponent {
   readonly dialogRef = inject(MatDialogRef<DniAlertComponent>);
+}
+
+@Component({
+    selector: 'search-alert',
+    templateUrl: 'search-not-found-alert.components.html',
+    styleUrl: 'search-not-found-alert.components.css',
+    standalone: true,
+    imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class SearchNotFoundAlertComponent {
+    readonly dialogRef = inject(MatDialogRef<SearchNotFoundAlertComponent>);
+    readonly data = inject<SearchData>(MAT_DIALOG_DATA);
+
+     staffTypeLabels: Record<StaffType, string> = {
+        [StaffType.FISIO]: "Fisioterapeuta",
+        [StaffType.TCAE]: "Técnico/a en Cuidados Auxiliares de Enfermería",
+        [StaffType.OCCUPATIONAL_THERAPY]: "Terapeuta ocupacional",
+        [StaffType.NURSE]: "Enfermero/a",
+        [StaffType.SPEECH_THERAPIST]: "Logopeda",
+        [StaffType.TEAP]: "Técnico/a Especialista en Anatomía Patológica",
+        [StaffType.TEDN]: "Técnico/a Especialista Dietética y Nutrición",
+        [StaffType.TEDS]: "Técnico/a Especialista en Documentación Sanitaria",
+        [StaffType.TEL]: "Técnico/a Especialista en Laboratorio",
+        [StaffType.TEMN]: "Técnico/a Especialista en Medicina Nuclear",
+        [StaffType.TER]: "Técnico/a Especialista en Radioterapia",
+        [StaffType.TERD]: "Técnico/a Especialista en Radiodiagnóstico",
+        [StaffType.TF]: "Técnico/a en Farmacia",
+        [StaffType.PODIATRIST]: "Podólogo/a",
+        [StaffType.TSESPC]: "Téc. Salud Educación para la Salud y Participación Comunitaria",
+        [StaffType.TSSA]: "Téc. Salud Sanidad Ambiental",
+        [StaffType.TSPRLPA]: "Técnico/a Superior en Prevención de Riesgos Laborales-Ergonomía y Psicosociología Aplicada",
+        [StaffType.TSPRLHI]: "Técnico/a Superior en Prevención de Riesgos Laborales-Higiene Industrial",
+        [StaffType.TSPRLST]: "Técnico/a Superior en Prevención de Riesgos Laborales-Seguridad en el Trabajo",
+        [StaffType.SOCIAL_WORKER]: "Trabajador/a Social",
+        [StaffType.ADM]: "Administrativo/a",
+        [StaffType.ADMINISTRATIVE_ASSISTANT]: "Auxiliar Administrativo/a",
+        [StaffType.CC]: "Celador/a Conductor/a",
+        [StaffType.CCUL]: "Celador/a-Conductor/a de Unidad Logística",
+        [StaffType.CCCTS]: "Celador/a-Conductor/a C.T.S.",
+        [StaffType.CCAA]: "Celador/a-Conductor/a de ambulancia asistencial tipo B y C",
+        [StaffType.COOK]: "Cocinero/a",
+        [StaffType.POC]: "Personal de Oficio Costurero/a",
+        [StaffType.MONITOR]: "Monitor/a",
+        [StaffType.POP]: "Personal de oficio Peluquero/a",
+        [StaffType.TEI]: "Técnico/a Especialista en Informática",
+        [StaffType.TSA]: "Técnico/a Superior en Alojamiento",
+        [StaffType.PHONE]: "Telefonista",
+        [StaffType.TEMEII]: "Técnico/a Especialista en Mantenimiento de Edificios e Instalaciones Industriales",
+        [StaffType.TEMEITF]: "T. E. M. E. I para Área de Instalaciones Térmicas y de Fluidos",
+        [StaffType.TEMEISEA]: "T. E. M. E. I. para Área de Sistemas Electrotécnicos y Automatizados",
+        [StaffType.TMAC]: "Técnico/a de Mantenimiento Acabados de Construcción",
+        [StaffType.TMMM]: "Técnico/a de Mantenimiento de Madera y Mueble",
+        [StaffType.TMOA]: "Técnico/a de Mantenimiento Obras de Albañilería",
+        [StaffType.TEE]: "Técnico/a Especialista en Electromedicina",
+        [StaffType.TIPRL]: "Técnico/a Intermedio/a en Prevención de Riesgos Laborales",
+        [StaffType.WARDEN]: "Celador/a",
+        [StaffType.CLEANER]: "Limpiador/a",
+        [StaffType.LAUNDRY_STAFF]: "Personal Lavandería - Planchado",
+        [StaffType.LABOURER]: "Peón",
+        [StaffType.HELPER]: "Pinche",
+    };
+
+    getStaffTypeLabel(staffType: string): string {
+        return this.staffTypeLabels[staffType as StaffType] ?? staffType;
+    }
 }

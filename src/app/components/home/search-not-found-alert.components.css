@@ -1,0 +1,45 @@
+/* Outer container for the modern look */
+.modern-dialog {
+    padding: 28px;
+    border-radius: 22px;
+
+    /* Glassmorphism */
+    background: rgba(194, 157, 232, 0.75);
+}
+
+/* Title */
+.dialog-title {
+    margin: 0 0 16px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #3a0a57; /* deep purple */
+}
+
+/* Text */
+.dialog-text {
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* List */
+.dialog-list {
+    padding-left: 18px;
+    margin: 0 0 22px;
+    font-size: 0.95rem;
+}
+
+.dialog-list li {
+    margin-bottom: 4px;
+}
+
+/* Button */
+.btn-accept {
+    background: #7b2cbf !important;       /* purple color matching page */
+    color: #fff !important;
+    border-radius: 12px !important;
+    padding: 6px 24px !important;
+
+    box-shadow: 0 4px 10px rgba(123, 44, 191, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}

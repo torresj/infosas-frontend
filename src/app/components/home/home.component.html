@@ -66,7 +66,7 @@
     </mat-form-field>
     <div class="or">- O BUSCAR POR -</div>
     <mat-form-field appearance="outline">
-      <mat-label>DNI</mat-label>
+      <mat-label>DNI con letra</mat-label>
       <input type="text" matInput formControlName="dni" id="dni" (input)="onInputChange()">
       @if (submit && form.hasError('requiredFields')) {
         <span class="error">El apellido o el dni es obligatorio</span>
